@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Advyteam.Models.CongeModels>
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nom
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            Quantite
+        </th>
+        <th>
+            Type de conge
+        </th>
+        <th>
+            Certificat
+        </th>
+        <th>
+            Accepter
+        </th>
+        <th>
+            Details
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDebut)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.typeConge)
+        </td>
+        @{
+            if (item.typeConge == "Maladie")
+            {
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.image)*@
+                    @{ string path = "~/Content/Upload/" + item.certefica;}
+                    <img style="width: 50px;height: 60px;" src="@Url.Content(path)" />
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.certefica)
+                </td>
+            }
+        }
+        <td>
+            <a href="@Url.Action("ExportPDF","Conge")">EXPORT PDF</a>
+        </td>
+        <td>
+            @Html.ActionLink("Details", "DetailsAdmin", new { id = item.id })
+        </td>
+
+        @*<td>
+            <button href="" type="submit" id="Refuser" class="btn btn-primary" data-id="@item.id">Refuser</button>
+        </td>*@
+    </tr>
+    }
+
+</table>
+
+

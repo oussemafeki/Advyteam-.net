@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Suggestion";
+}
+
+<h2>Suggestion</h2>
+
+@foreach (var p in ViewBag.result)
+{
+<div class="alert alert-warning alert-dismissible fade show" role="alert"><button class="close" type="button" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><strong>@p.nom @p.prenom : </strong> @p.password</div>
+}

@@ -1,0 +1,82 @@
+﻿@model Advyteam.Models.CongeModels
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CongeModels</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateDebut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateDebut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFin)
+        </dd>
+        @{
+            if (ViewBag.typedeconge == "Maladie")
+            {
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.image)*@
+                    @{ string path = "~/Content/Upload/" + ViewBag.certificat;}
+                    <img style="width: 50px;height: 60px;" src="@Url.Content(path)" />
+                </td>
+            }
+            else
+            {
+                <td>
+                    @(ViewBag.certificat)
+                </td>
+            }
+        }
+        <dt>
+            @Html.DisplayNameFor(model => model.typeConge)
+        </dt>
+        <dd>
+            @ViewBag.typedeconge
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+@{if (ViewBag.reponse == "true")
+    {
+        if (ViewBag.nbr_jrs > 0)
+        {
+            <p>test</p>
+
+
+            <div class="card-body">
+                <div class="progress mb-3">
+                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">En cours</span></div>
+                </div>
+            </div>
+            <div>Il vous reste @(ViewBag.nbr_jrs) jours pour votre congés</div>
+        }
+    }
+    else
+    {
+        <div class="card-body">
+            <div class="progress mb-3">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"><span class="sr-only">En cours</span></div>
+            </div>
+        </div>
+        <div>N'est pas encore accepté</div>
+
+
+    }
+}

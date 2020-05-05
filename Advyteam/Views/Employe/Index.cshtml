@@ -1,0 +1,37 @@
+﻿@model Advyteam.Models.EmployeModels
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width-device-width" />
+    <title></title>
+</head>
+<body>
+    <a href="@Url.Action("Create","Employe")">add Employe</a>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>email</th>
+            <th>actif</th>
+            <th>nom</th>
+            <th>password</th>
+            <th>prenom</th>
+        </tr>
+        @foreach (var p in ViewBag.result)
+        {
+            <tr>
+                <th>@p.id</th>
+                <th>@p.email</th>
+                <th>@p.actif</th>
+                <th>@p.nom</th>
+                <th>@p.password</th>
+                <th>@p.prenom</th>
+            </tr>
+        }
+    </table>
+</body>
+</html>

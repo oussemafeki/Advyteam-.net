@@ -1,0 +1,59 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+          Description
+        </th>
+  
+        <th>
+   name
+        </th>
+        <th>
+           nbplace
+        </th>
+        <th>date</th>
+        <th>
+           Action
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in ViewBag.result) {
+    <tr>
+        <td>
+          @item.Description
+        </td>
+ 
+        <td>
+           @item.name
+        </td>
+        <td>
+            @item.nbplace
+        </td>
+        <td>
+            @item.date
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>
+<a class="btn btn-default" href="@Url.Action("Index", "Home")">Asigneaza Quizuri</a>
+
+<div>
+    <input type="submit" value="Create Document" style="width:150px;height:27px" />
+</div>

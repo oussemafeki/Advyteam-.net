@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Domain.modules>
+
+@{
+    ViewBag.Title = "DetailsModules";
+}
+
+<h2>Details Modules</h2>
+
+<p>
+  
+    <div class="ml-auto"> <button class="btn btn-secondary btn-sm" type="button"><a href="@Url.Action("CreateModule", new { idp = @ViewBag.idd})">Ajouter Module</a></button></div>
+</p>
+<!--<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.descriptionModule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomModule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.projet_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.flagActif)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.descriptionModule)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomModule)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.projet_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.flagActif)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>-->
+
+@foreach (var item in Model)
+{
+    <div id="accordion">
+        <div class="card card-default mb-1">
+            <div class="card-header" id="headingOne">
+                <div class="mb-0">
+                    <div class="clearfix">
+                        <h4><a class="text-inherit" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" href="#">Module @Html.DisplayFor(modelItem => item.nomModule)</a><span class="float-right"> 
+                            <a class="btn pull-right btn-light" href="@Url.Action("DetailsTaches", new { idt=item.id })" role="button">details taches</a>
+                            <a class="btn pull-right btn-warning" href="@Url.Action("updatetache", new { idt = item.id })" role="button">Modifier</a>
+                            <a class="btn pull-right btn-danger" href="@Url.Action("deletetache", new { idt=item.id  })" role="button">Supprimer</a></span></h4>
+                    
+                    </div>
+                    </div>
+            </div>
+            <div class="collapse show" id="collapseOne" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body border-top">@Html.DisplayFor(modelItem => item.descriptionModule)</div>
+            </div>
+        </div>
+        </div>
+        }

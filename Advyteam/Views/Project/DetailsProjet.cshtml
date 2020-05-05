@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "DetailsProjet";
+}
+<head><script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['tache terminer', @ViewBag.nombretachetermine],
+          ['tache non realiser', @ViewBag.nbrtacheNonRealise],
+          ['tache en cours', @ViewBag.nbrtacheEncour]
+        ]);
+
+        var options = {
+          title: 'pourcentage des taches selon letat'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+</script>
+    
+    </head>
+<h2>DetailsProjet</h2>
+
+<div class="content-wrapper">
+    <div class="content-heading">
+        <div>@ViewBag.titre</div>
+    </div>
+  
+    <div class="row">
+        <div class="col-xl-8">
+            <!-- Main card-->
+            <div class="card b">
+                <div class="card-header">
+                    @if (@ViewBag.nombretachetermine == 0 && @ViewBag.nbrtacheEncour == 0)
+                    {
+                        <div class="float-right">
+                            <div class="badge badge-warning">nouveau projet</div>
+                        </div>
+                    }
+                    else if (@ViewBag.nombretachetermine == @ViewBag.nombreTotelTache) {
+                  
+                    <div class="float-right">
+                        <div class="badge badge-success">Terminer</div>
+                    </div>
+                    }
+                    else
+                    {
+                        <div class="float-right mt-2">
+                            <div class="badge badge-info">En cour</div>
+                        </div>
+                    }
+                </div>
+               <!-- <div class="card-body bb bt">
+                    <a class="inline" href="#" data-toggle="tooltip" data-title="Team leader"><img class="rounded-circle thumb48" src="img/user/03.jpg" alt="project member"></a><a class="inline" href="#"><img class="rounded-circle thumb24" src="img/user/02.jpg" alt="project member"></a><a class="inline" href="#"><img class="rounded-circle thumb24" src="img/user/04.jpg" alt="project member"></a><a class="inline" href="#"><img class="rounded-circle thumb24" src="img/user/05.jpg" alt="project member"></a><a class="inline" href="#"><img class="rounded-circle thumb24" src="img/user/06.jpg" alt="project member"></a><a class="inline" href="#"><img class="rounded-circle thumb24" src="img/user/07.jpg" alt="project member"></a><a class="inline" href="#"><img class="rounded-circle thumb24" src="img/user/08.jpg" alt="project member"></a><a class="inline" href="#"><img class="rounded-circle thumb24" src="img/user/09.jpg" alt="project member"></a>
+                    <div class="float-right mt-2"><button class="btn btn-secondary" type="button">Add Member</button></div>
+                </div>-->
+                <div class="card-body">
+                    <h4>Description</h4>
+                    <p>@ViewBag.description</p>
+               
+                </div>
+                <div class="card-body">
+
+                   
+
+                    <div id="piechart" style="width: 800px; height: 500px;"></div>
+                    <button class="btn btn-secondary btn-sm" type="button"><a href="@Url.Action("reunion", new { id = @ViewBag.idd })">planifier une reunion</a></button>
+
+
+                </div>
+               
+            </div><!-- End Main card-->
+            <!-- Team messages-->
+            <div class="card card-default">
+               
+                <!-- START card footer-->
+              
+            </div><!-- End Team messages-->
+        </div>
+        <div class="col-xl-4">
+            <!-- Aside card-->
+            <div class="card b">
+                <div class="card-body bb">          
+                </div>
+                <div class="card-body bb">
+                    <div class="d-flex align-items-center">
+                        <div class="w-100">
+                            <div class="progress progress-xs m-0">
+                                <div class="progress-bar bg-info" style='width:@ViewBag.stat%'></div>
+                            </div>
+                        </div>
+                        <div class="wd-xxs text-right">
+                            <div class="text-bold text-muted">@ViewBag.stat%</div>
+                        </div>
+                    </div>
+                </div>
+               
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td><strong>date debut :</strong></td>
+                            <td>  @ViewBag.dateDebutProjet</td>
+                        </tr>
+                        <tr>
+                            <td><strong>heures estimees :</strong></td>
+                            <td>@ViewBag.dateestimer h</td>
+                        </tr>
+                     <!--   <tr>
+                            <td><strong>heures consommees :</strong></td>
+                            <td>62hs</td>
+                        </tr>-->
+                       
+                        <tr>
+                            <td><strong>memebres de l'equipe :</strong></td>
+                            <td>
+                                @foreach (var p in ViewBag.user) {
+                                 <p>@p.nom @p.prenom</p>
+                                }
+                               
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nombre de taches total :</strong></td>
+                            <td>@ViewBag.nombreTotelTache</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nombre de taches en cours :</strong></td>
+                            <td>@ViewBag.nbrtacheEncour</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nombre de taches Terminee :</strong></td>
+                            <td>@ViewBag.nombretachetermine</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nombre de taches non realise :</strong></td>
+                            <td>@ViewBag.nbrtacheNonRealise</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+            </div><!-- end Aside card-->
+        </div>
+    </div>
+</div>

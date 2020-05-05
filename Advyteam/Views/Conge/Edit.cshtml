@@ -1,0 +1,77 @@
+﻿@model Advyteam.Models.CongeModels
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Conge", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>CongeModels</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateDebut, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateDebut, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateDebut, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateFin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DateFin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DateFin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.typeConge, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="form-group">
+                Normale
+                @Html.RadioButtonFor(model => model.typeConge, "Normale", htmlAttributes: new { @id = "Normale" })
+                Maladie
+                @Html.RadioButtonFor(model => model.typeConge, "Maladie", htmlAttributes: new { @id = "Maladie" })
+            </div>
+        </div>
+        <div class="form-group" id="certificat" style="display: none">
+            <div class="editor-label">
+                Certificat
+            </div>
+            <div class="editor-field">
+                Upload a file
+                @Html.TextBox("file", "", new { type = "file" })
+                @Html.ValidationMessageFor(model => model.certefica)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script>
+    $(document).ready(function () {
+        $("#Normale").click(function () {
+            $("#certificat").hide();
+        }
+        );
+        $("#Maladie").click(function () {
+            $("#certificat").show();
+        }
+        );
+    });
+</script>

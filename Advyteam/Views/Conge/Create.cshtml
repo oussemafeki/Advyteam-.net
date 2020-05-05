@@ -1,0 +1,103 @@
+﻿@model Advyteam.Models.CongeModels
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+
+
+
+
+
+
+
+
+@using (Html.BeginForm("Create", "Conge", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="form-horizontal">
+    <h4>EmployeModels</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateDebut, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.DateDebut)
+                @Html.ValidationMessageFor(model => model.DateDebut, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.DateFin, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.DateFin, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.DateFin, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.typeConge, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group">
+            Normale
+            @Html.RadioButtonFor(model => model.typeConge, "Normale", htmlAttributes: new { @id = "Normale" })
+            Maladie
+            @Html.RadioButtonFor(model => model.typeConge, "Maladie", htmlAttributes: new { @id = "Maladie" })
+        </div>
+    </div>
+    @*<div class="form-group" id="certificat" style="display: none">
+            @Html.LabelFor(model => model.certefica, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.certefica, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.certefica, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <div class="form-group" id="certificat" style="display: none">
+        <div class="editor-label">
+            Certificat
+        </div>
+        <div class="editor-field">
+            Upload a file
+            @Html.TextBox("file", "", new { type = "file" })
+            @Html.ValidationMessageFor(model => model.certefica)
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button href="" type="submit" id="addRessource" class="btn btn-primary">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#Normale").click(function () {
+            $("#certificat").hide();
+        }
+        );
+        $("#Maladie").click(function () {
+            $("#certificat").show();
+        }
+        );
+    });
+</script>

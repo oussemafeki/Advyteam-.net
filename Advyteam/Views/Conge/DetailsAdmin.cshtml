@@ -1,0 +1,106 @@
+﻿@model Advyteam.Models.CongeModels
+
+@{
+    ViewBag.Title = "DetailsAdmin";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CongeModels</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m => m.DateDebut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(m => m.DateDebut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(m => m.DateFin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(m => m.DateFin)
+        </dd>
+
+        @{
+            if (Model.typeConge == "Maladie")
+            {
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.image)*@
+                    @{ string path = "~/Content/Upload/" + Model.certefica;}
+                    <img style="width: 50px;height: 60px;" src="@Url.Content(path)" />
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => Model.certefica)
+                </td>
+            }
+        }
+        <dt>
+            @Html.DisplayNameFor(m => m.typeConge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(m => m.typeConge)
+        </dd>
+
+        @if (ViewBag.reponse == "false")
+        {
+
+
+            <dt>
+                <button href="" type="submit" id="Accepter" data-id="@Model.id" class="btn btn-primary">Accepter</button>
+            </dt>
+            <p style="display: none" id="green" class="ml-auto circle bg-success circle-lg" />
+            <p id="red" class="ml-auto circle bg-danger circle-lg" />
+
+
+        }
+
+        else
+        {
+            <p id="green" class="ml-auto circle bg-success circle-lg" />
+
+        }
+
+
+
+
+
+
+
+</div>
+<p>
+    @Html.ActionLink("Back to List", "IndexAdmin")
+</p>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script>
+    $("body").on("click", "#Accepter", function () {
+
+        var url = window.location.pathname;
+        var idConge = url.substring(url.lastIndexOf('/') + 1);
+
+        var jsonParam = JSON.stringify({ 'idConge': idConge });
+        $.ajax({
+            type: "POST",
+            url: "/Conge/IndexAdminAction",
+            data: jsonParam,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                $("#Accepter").hide();
+                $("#green").show();
+                $("#red").hide();
+
+            }
+        });
+        return false;
+    });
+</script>

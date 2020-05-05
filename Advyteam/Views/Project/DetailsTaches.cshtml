@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Domain.taches>
+
+@{
+    ViewBag.Title = "DetailsTaches";
+}
+
+<h2>Details Taches</h2>
+
+<p>
+   
+    <button class="btn btn-secondary btn-sm" type="button"><a href="@Url.Action("CreateModule", new { idm = Model.First().modules_id })">Ajouter tache</a></button>
+
+</p>
+<!--<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dateDebut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateEstimer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descriptionTache)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.etat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nomTache)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.modules_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.user_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.flagActif)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateDebut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateEstimer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descriptionTache)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.etat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nomTache)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.modules_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.user_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.flagActif)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>-->
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        if (item.etat == 0)
+        {
+            <div class="col-lg-4">
+                <div class="card mb-3 border-primary">
+                    <div class="card-header text-white bg-primary">@item.nomTache</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Description :</h5>
+                        <p class="card-text">@item.descriptionTache</p>
+                        <p class="card-text">date estime :@item.dateEstimer</p>
+                      
+                    </div>
+                </div>
+            </div>
+
+        }
+
+    }
+    @foreach (var item in Model)
+    {
+        if (item.etat == 1)
+        {
+            <div class="col-lg-4">
+                <div class="card mb-3 border-warning">
+                    <div class="card-header text-white bg-warning">@item.nomTache</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Description :</h5>
+                        <p class="card-text">@item.descriptionTache</p>
+                        <p class="card-text">affecte a :@item.user_id</p>
+                        <p class="card-text">date estime :@item.dateEstimer</p>
+                        <p class="card-text">date Debut :@item.dateDebut</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    @foreach (var item in Model)
+    {
+        if (item.etat == 2)
+        {
+            <div class="col-lg-4">
+                <div class="card mb-3 border-success">
+                    <div class="card-header text-white bg-success">@item.nomTache</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Description :</h5>
+                        <p class="card-text">@item.descriptionTache</p>
+                        <p class="card-text">date estime :@item.dateEstimer</p>
+                        <p class="card-text">date Debut :@item.dateDebut</p>
+                        <p class="card-text">date fin :@item.dateFin</p>
+                       
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+</div>

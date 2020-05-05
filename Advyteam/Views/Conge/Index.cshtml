@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Advyteam.Models.CongeModels>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Date Debut
+        </th>
+        <th>
+            Date Fin
+        </th>
+        <th>
+            Type de conge
+        </th>
+        <th>
+            Certificat
+        </th>
+        <th>
+            Action
+        </th>
+
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DateDebut)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.typeConge)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.certefica)
+                </td>*@
+            @{
+                if (item.typeConge == "Maladie")
+                {
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.image)*@
+                        @{ string path = "~/Content/Upload/" + item.certefica;}
+                        <img style="width: 50px;height: 60px;" src="@Url.Content(path)" />
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.certefica)
+                    </td>
+                }
+            }
+
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.id })
+            </td>
+        </tr>
+    }
+    <a href="https://www.facebook.com/sharer.php?u=https://www.advyteam.com">
+        <i class="shopbtn">Partagez sur facebook</i>
+    </a>
+
+</table>

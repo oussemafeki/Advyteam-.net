@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All_missions</h2>
+
+<p>
+    <a href="@Url.Action("Create", "mission")">Add mission</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nom Mission
+        </th>
+        <th>
+            description
+        </th><th>
+    type
+</th><th>
+    Adresse
+</th>
+        <th>
+            dateDeb
+        </th>
+        <th>
+            dateFin
+        </th>
+       
+        
+        
+        
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.Result)
+    {
+        <tr>
+            <td>
+                @item.nomMission
+            </td><td>
+    @item.description
+</td><td>
+    @item.type
+</td>
+<td>
+                @item.adresse
+            </td>
+            <td>
+                @item.dateDeb
+            </td>
+            <td>
+                @item.dateFin
+            </td>
+           
+           
+            
+          
+          
+            <td>
+                <a href="@Url.Action("RequestDemande","Mission",new { mission_id = item.id })">
+                    <button class="btn btn-labeled btn-secondary" type="button">
+                        Request
+                        <span class="btn-label btn-label-right">
+                            <i class="fa fa-arrow-right"></i>
+                        </span>
+                    </button>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

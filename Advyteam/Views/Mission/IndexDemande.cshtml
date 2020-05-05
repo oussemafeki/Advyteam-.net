@@ -1,0 +1,98 @@
+﻿
+
+@{
+    ViewBag.Title = "IndexDemande";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>All_missions</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Nom Employé
+        </th>
+        <th>
+            Prenom Employé
+
+        </th>
+        <th>
+            Nom Mission
+
+        </th>
+        <th>
+            Date Fin Mission
+
+        </th>
+        <th>
+            Etat Mission
+        </th>
+        <th>
+            Etat Demande
+        </th>
+
+
+
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.Result)
+    {
+        <tr>
+            <td>
+                @item.employe.nom
+            </td>
+            <td>
+                @item.employe.prenom
+            </td>
+            <td>
+                @item.mission.nomMission
+            </td>
+            <td>
+                @item.mission.dateFin
+            </td>
+            <td>
+                @item.etat
+            </td>
+            <td>
+                @item.isValide
+            </td>
+            
+            
+
+
+            <td>
+                <a href="@Url.Action("Delete","Mission",new { id = item.id})">
+                    <button class="btn btn-labeled btn-danger mb-2" type="button">
+                    <span class="btn-label">
+                        <i class="fa fa-times">
+                        </i></span>Refuser</button>
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("Edit","Mission",new { id = item.id})">
+                    <button class="btn btn-labeled btn-danger mb-2" type="button">
+                        <span class="btn-label">
+                            <i class="fa fa-times">
+                            </i>
+                        </span>Approuver
+                    </button>
+                </a>
+            </td>
+
+            <td>
+                <a href="@Url.Action("Index","Mission")">
+                    <button class="btn btn-labeled btn-secondary" type="button">
+                        All Missions
+                        <span class="btn-label btn-label-right">
+                            <i class="fa fa-arrow-right"></i>
+                        </span>
+                    </button>
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

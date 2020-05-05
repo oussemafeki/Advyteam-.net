@@ -1,0 +1,52 @@
+﻿
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    </br> </br>
+    <h2>          Show Criterions </h2>
+    </br> </br>
+    <div class="card">
+        <center>
+            <table class="table table-bordered table-sm" id="users">
+                <tbody>
+                    <tr>
+
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                    @foreach (var p in ViewBag.result)
+                    {
+                        <tr>
+
+                            <td>@p.nom</td>
+                            <td>@p.description</td>
+                            <td>
+
+                                <a href="@Url.Action("Delete", "Critere", new { id = p.id })"><button class="mb-1 btn btn-danger" type="button">Delete</button></a>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+
+            </br>
+            <a href="@Url.Action("Create","Critere")"> <button class="btn btn-primary" type="button">Add new criterion</button> </a>
+        </center>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Home2";
+}
+
+<h2>Choose a criterion to evaluate @ViewBag.user </h2>
+
+<div class="card">
+    <center>
+        <table class="table table-bordered table-sm" id="users">
+            <tbody>
+                <tr>
+
+                    <th>Name</th>
+                    <th>Description</th>
+                </tr>
+                @foreach (var p in ViewBag.result)
+                {
+                    <tr>
+
+                        <td>@p.nom</td>
+                        <td>@p.description</td>
+                        <td>
+
+                            <div> <a class="btn btn-xs btn-primary" href="@Url.Action("Create", "ManagerEval", new { criterion = p.id ,user=ViewBag.id})">OK</a></div>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+
+        </br>
+        <a href="@Url.Action("Home","ManagerEval")"> <button class="btn btn-primary" type="button">Back</button> </a>
+    </center>
+    
+</div>
