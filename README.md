@@ -1,1 +1,1 @@
-Don't forget to run the server first ! 
+You should run the back end ( advyteam jee ) first .
